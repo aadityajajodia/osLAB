@@ -1,0 +1,152 @@
+#/bin/bash
+
+files=`ls *sh`
+
+for i in $files;do
+	
+	
+	cat $i>>combine.txt 
+	cat changeLine.txt>>combine.txt
+
+done
+
+#!/bin/bash
+echo "1. line count"
+echo "2. word count"
+echo "3. char count"
+read opt
+case $opt in 
+	1) echo "you selected one" 
+		result=`wc -l $1`
+		echo $result;; 
+	2) echo "you selected two"
+		result=`wc -w $1`
+		echo $result;;
+	3) echo "you selected three"
+		result=`wc -c $1`
+		echo $result;;
+	*) echo "you selected invalid option";;
+esac
+
+#/bin/bash
+echo "Enter file name"
+read filename
+while ((1)); do
+
+	echo "1.search the pattern"
+	echo "2.delete all occurences"
+	echo "3.Exit from the shell script"
+	echo "enter your option"
+	read option
+	case $option in
+		1)
+		echo "you selected option one"
+		for i in $@;do
+			grep $i $filename
+		done
+		;;
+
+		2)
+		echo "you selected otion two"
+		for i in $@;do
+			sed -i -e "s/$i//g" $filename
+		done
+		;;
+		3)	
+		echo "you selected option three"
+		break;;
+	esac
+done
+
+#!/bin/bash
+read a
+result=`ls -l $a | cut -c 1`
+echo $result
+if [ "$result" = "-" ]; then
+	echo "file"
+else
+	echo "directory"
+fi
+
+#!/bin/bash
+echo "enter folder name"
+read folder
+echo "Input the pattern"
+read pattern
+cd $folder
+ls *$pattern*
+
+
+#!/bin/bash
+read a
+result=`find . -name "*$a"`
+$result=$result|cut -d "." -f 2 
+
+
+#!/bin/bash
+echo "enter basics"
+read basics
+echo "enter TA"
+read TA
+result=`echo "$basics+$TA+0.1*$basics"|bc -l`
+echo $result
+
+#!/bin/bash
+echo "enter extension"
+read extension
+echo "enter new folder name"
+read folder
+mkdir $folder
+cp *$example $folder
+
+#!/bin/bash
+echo "enter folder" # i am reading folder
+read folder 	#because this current folder contains this file
+cd $folder				#which contains ex and example
+files=`ls -f`
+for i in $files;do
+	if [[ -f $i ]]; then
+		sed -i -e 's/^ex/example/' $i
+		sed -i -e 's/.ex/example/' $i
+	fi
+done
+
+name=`ls $1|cut -d "." -f 1`
+ext=`ls $1|cut -d "." -f 2`
+cp $1 $name"(copy)."$ext
+
+#!/bin/bash
+for i in $@;do
+	rm -i $i
+done
+
+# #!/bin/bash 
+# rm -i $*
+
+#!/bin/bash
+declare -a myArray
+x=0
+for i in $@;do
+	myArray[x]=$i
+	((x++))
+done
+for i in ${myArray[@]};do
+	echo $i
+done
+
+for((i=0;i<$#-1;i++));do
+	for((j=0;j<$#-i-1;j++));do
+		if [ ${myArray[$j]} \> ${myArray[$((j+1))]} ]; then
+			{
+				temp=${myArray[$j]}
+				myArray[$j]=${myArray[$((j+1))]}
+				myArray[$((j+1))]=$temp
+			}
+		fi
+	done
+done
+echo "the sorted list is:"
+for i in ${myArray[@]};do
+	echo $i
+done
+
