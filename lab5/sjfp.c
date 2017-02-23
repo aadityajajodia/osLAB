@@ -12,6 +12,7 @@ void main()
 	int pid[100];
 	int at[100];
 	int bt[100];
+	int bt2[100];
 	int i,j;
 	int ct[100];
 	int tat[100];
@@ -37,6 +38,10 @@ void main()
 	}
 	for(i=0;i<n;i++)
 		printf("Process %d has burst time %d\n",pid[i],bt[i]);
+	for (int i = 0; i < n; ++i)
+	{
+		bt2[i]=bt[i];
+	}
 	for(i=0;i<n-1;i++)
 		for(j=0;j<n-i-1;j++)
 		{
@@ -45,33 +50,34 @@ void main()
 				swap(&at[j],&at[j+1]);
 				swap(&pid[j],&pid[j+1]);
 				swap(&bt[j],&bt[j+1]);
+				swap(&bt2[j],&bt2[j+1]);
 		
 			}		
 		}
 	int compTime=at[0];
-	for(i=0;i<n-1;i++)
+	i=0;
+	while(1)
 	{
-		int timer=0;
-		while(timer<at[i+1]&&timer<=bt[i])
+		int min=i;
+		j=i+1;
+		while((at[j]<=compTime)&&(j<n))
 		{
-			compTime++;
-			ct[i]=compTime;
-
-		}
-		bt[i]=bt[i]-timer;
-		j=i;
-		while((at[j]<compTime)&&(j<n-1))
-		{
-			if(bt[i]>bt[i+1])
-			{
-				swap(&at[i],&at[i+1]);
-				swap(&pid[i],&pid[i+1]);
-				swap(&bt[i],&bt[i+1]);
-				i--;
-				continue;
-			}
+			if(bt[min]>bt[j])
+				min=j;
 			j++;
 		}
+		swap(&at[min],&at[i]);
+		swap(&pid[min],&pid[i]);
+		swap(&bt[min],&bt[i]);
+		swap(&bt2[min],&bt2[i]);
+		swap(&ct[min],&ct[i]);
+		compTime++;
+		ct[i]=compTime;
+		bt[i]--;
+		if(bt[i]==0)
+			i++;
+		if(i==n-1)
+			break;
 	}
 	compTime+=bt[i];
 	ct[i]=compTime;
@@ -81,7 +87,7 @@ void main()
 	for(i=0;i<n;i++)
 		tat[i]=ct[i]-at[i];
 	for(i=0;i<n;i++)
-		wt[i]=tat[i]-bt[i];
+		wt[i]=tat[i]-bt2[i];
 	for(i=0;i<n;i++)
 		printf("Process %d has turn around time %d\n",pid[i],tat[i]);
 	for(i=0;i<n;i++)
@@ -89,23 +95,4 @@ void main()
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
