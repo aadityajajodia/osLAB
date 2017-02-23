@@ -12,7 +12,6 @@ void main()
 	int pid[100];
 	int at[100];
 	int bt[100];
-	int p[100];
 	int i,j;
 	int ct[100];
 	int tat[100];
@@ -38,14 +37,6 @@ void main()
 	}
 	for(i=0;i<n;i++)
 		printf("Process %d has burst time %d\n",pid[i],bt[i]);
-	for(i=0;i<n;i++)
-	{
-		printf("Enter priority for process %d ",pid[i]);
-		scanf("%d",&p[i]);
-	}
-	for(i=0;i<n;i++)
-		printf("Process %d has priority time %d\n",pid[i],p[i]);
-	
 	for(i=0;i<n-1;i++)
 		for(j=0;j<n-i-1;j++)
 		{
@@ -54,30 +45,33 @@ void main()
 				swap(&at[j],&at[j+1]);
 				swap(&pid[j],&pid[j+1]);
 				swap(&bt[j],&bt[j+1]);
-				swap(&p[j],&p[j+1]);
 		
 			}		
 		}
 	int compTime=at[0];
 	for(i=0;i<n-1;i++)
 	{
-		compTime+=bt[i];
-		ct[i]=compTime;
-		j=i+1;
-		int min=j;
+		int timer=0;
+		while(timer<at[i+1]&&timer<=bt[i])
+		{
+			compTime++;
+			ct[i]=compTime;
+
+		}
+		bt[i]=bt[i]-timer;
+		j=i;
 		while((at[j]<compTime)&&(j<n-1))
 		{
-
-			if(p[min]>p[j+1])
+			if(bt[i]>bt[i+1])
 			{
-				min=j+1;
+				swap(&at[i],&at[i+1]);
+				swap(&pid[i],&pid[i+1]);
+				swap(&bt[i],&bt[i+1]);
+				i--;
+				continue;
 			}
 			j++;
 		}
-		swap(&at[min],&at[i+1]);
-		swap(&pid[min],&pid[i+1]);
-		swap(&bt[min],&bt[i+1]);
-		swap(&p[min],&p[i+1]);
 	}
 	compTime+=bt[i];
 	ct[i]=compTime;
