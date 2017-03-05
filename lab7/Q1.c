@@ -23,14 +23,14 @@ void main()
 	printf("Enter number of resources\n");
 	scanf("%d",&r);
 	printf("You entered number of resources as %d\n",n);
-		
+
 	for(i=0;i<n;i++)
 	{
 		printf("Enter allocated resources for process %d\n",i);
 		for(j=0;j<r;j++)
 			scanf("%d",&allocat[i][j]);
-		
-	}		
+
+	}
 	printf("Allocated matrix is \n");
 	for(i=0;i<n;i++)
 	{
@@ -43,8 +43,8 @@ void main()
 		printf("Enter MAX resources for process %d\n",i);
 		for(j=0;j<r;j++)
 			scanf("%d",&max[i][j]);
-		
-	}		
+
+	}
 	printf("MAX matrix is \n");
 	for(i=0;i<n;i++)
 	{
@@ -54,15 +54,20 @@ void main()
 	}
 	printf("Enter available resources at this momemt\n");
 	for(i=0;i<r;i++)
-		scanf("%d",&avail[i]);	
+		scanf("%d",&avail[i]);
 	printf("Availabe resources at this moment are\n");
 	for(i=0;i<r;i++)
+    {
+
+
 		printf("%d\t",avail[i]);
+		work[i]=avail[i];
+    }
 	printf("\n");
 	for(i=0;i<n;i++)
 	{
 		for(j=0;j<r;j++)
-		need[i][j] = max[i][j] -allocat[i][j];		
+		need[i][j] = max[i][j] -allocat[i][j];
 	}
 	printf("Need matrix is \n");
 	for(i=0;i<n;i++)
@@ -71,15 +76,16 @@ void main()
 			printf("%d\t",need[i][j]);
 		printf("\n");
 	}
-	
+
 	i=0;
 	j=0;
+	flag4=0;
 	while(1)
 	{
-		flag4=i;
-		counter=0;
-		while(counter<n)
-		{
+		flag4=0;
+		 counter=0;
+		 while(counter<n)
+		 {
 
 			flag=0;
 			if(finish[i]==0)
@@ -95,18 +101,99 @@ void main()
 
 			if(flag==1)
 			{
-				
+
 				finish[i]=1;
 				for(k=0;k<r;k++)
 					work[k]=work[k]+allocat[i][k];
 				seq[j++]=i;
-				
+				flag4=1;
+
+
 			}
-			
+
 			i=(i+1)%n;
 			counter++;
 		}
-		if(flag4==i)
+		if(flag4==0)
+			break;
+	}
+	flag3=1;
+	for(i=0;i<n;i++)
+		if(finish[i]==0)
+		{
+			flag3=0;
+			break;
+		}
+	if(flag3==1){
+		printf("yes\n");
+		printf("The safe sequence is\n");
+		for (i = 0; i < n; ++i)
+		{
+			printf("P%d\n",seq[i] );
+		}
+		printf("Enter your request process number\n");
+		int n1;
+		scanf("%d",&n1);
+		int req;
+		printf("Enter your request\n");
+		for(i=0;i<r;i++)
+		{
+			scanf("%d",&req);
+			allocat[n1][i]=allocat[n1][i]+req;
+			avail[i]=avail[i]-req;
+			work[i]=avail[i];
+		}	
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<r;j++)
+		need[i][j] = max[i][j] -allocat[i][j];
+	}
+	printf("Need matrix is \n");
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<r;j++)
+			printf("%d\t",need[i][j]);
+		printf("\n");
+	}
+
+	i=0;
+	j=0;
+	flag4=0;
+	while(1)
+	{
+		flag4=0;
+		 counter=0;
+		 while(counter<n)
+		 {
+
+			flag=0;
+			if(finish[i]==0)
+			{
+				flag=1;
+				for(k=0;k<r;k++)
+					if(need[i][k]>work[k])
+					{
+						flag=0;
+						break;
+					}
+			}
+
+			if(flag==1)
+			{
+
+				finish[i]=1;
+				for(k=0;k<r;k++)
+					work[k]=work[k]+allocat[i][k];
+				seq[j++]=i;
+				flag4=1;
+
+
+			}
+
+			i=(i+1)%n;
+			counter++;
+		}
+		if(flag4==0)
 			break;
 	}
 	flag3=1;
@@ -125,28 +212,10 @@ void main()
 		}
 	}
 	else
-		printf("no\n");	
+		printf("no\n");
+
+	}
+	else
+		printf("no\n");
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
