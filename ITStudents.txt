@@ -1,0 +1,4 @@
+123:aditya:ICT:CCE:A:100:100:100
+100:papu:ICT:Information Technology:B:20:20:40
+200:ramesh:EEE:EEE:A:33:44:55
+113:aditya:ICT:CCE:F:10:70:15
