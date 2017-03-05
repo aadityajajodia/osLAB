@@ -76,36 +76,39 @@ void main()
 					break;
 			if(tq<bt2[t]&&bt2[t]!=0)
 			{
+				
 				bt2[t]=bt2[t]-tq;
 				compTime=compTime+tq;
 				ct[t]=compTime;
-				store[k++]=pid[t];
-				current++;
 				while(at[j]<=compTime&&j<n)
 				{
 					store[k]=pid[j];
 					k++;
 					j++;
 				}
+				store[k++]=pid[t];
+				current++;
+				printf("%d %d \n",pid[t],compTime);
+				
 			}
 			else if(bt2[t]!=0)
 			{
+				
 				compTime+=bt2[t];
 				ct[t]=compTime;
 				bt2[t]=0;
 				current++;
-				
 				while(at[j]<=compTime&&j<n)
 				{
 					store[k]=pid[j];
 					k++;
 					j++;
 				}
-
+				printf("%d %d\n",pid[t],compTime);
 			}
 	
 		}
-		if(current>k||current==k)
+		if(current==k)
 					break;
 	}
 		
