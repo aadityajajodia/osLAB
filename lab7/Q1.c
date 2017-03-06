@@ -1,5 +1,5 @@
 #include<stdio.h>
-int main(int argc, char const *argv[])
+int main(int argc, char* argv[])
 {
 	int n;
 	int r;
@@ -15,15 +15,15 @@ int main(int argc, char const *argv[])
 	j=0;
 	int flag=0,flag3=0,k=0,flag4=0,counter=0;
 	int seq[10];
-	for(i=0;i<r;i++)
-		finish[i]=0;
+	
 	printf("Enter number of process\n");
 	scanf("%d",&n);
 	printf("You entered number of process as %d\n",n);
 	printf("Enter number of resources\n");
 	scanf("%d",&r);
 	printf("You entered number of resources as %d\n",n);
-
+	for(i=0;i<r;i++)
+		finish[i]=0;
 	for(i=0;i<n;i++)
 	{
 		printf("Enter allocated resources for process %d\n",i);
