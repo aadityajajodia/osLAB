@@ -35,7 +35,10 @@ void main()
 			count=(count+1)%fnum;
 			farr[count]=temp;
 		}
-		printf("%d %d %d\n",farr[0],farr[1],farr[2] );
+		for(j=0;j<fnum;j++)
+			printf("%d\t",farr[j]);
+		printf("\n");
+
 	}
 	printf("Number of fault = %d\n",fault );
 }
