@@ -171,8 +171,122 @@ void scan()
 	printf("total distace covered is%d\n",distance );
 	
 }
-void cscan(){}
-void clook(){}
+void cscan()
+{
+	distance=0;
+	if(h<p)
+	{
+		for(i=0;i<n;i++)
+		{
+			if(arr[i]>h)
+			{
+				tempindex=i-1;
+				break;
+			}
+		}
+		for(i=tempindex;i>=0;i--)
+		{
+			printf("%d\n",arr[i] );
+			distance+=(temph-arr[i]);
+			temph=arr[i];
+		}
+		printf("0\n");
+		distance+=temph-0;
+		temph=up;
+		printf("%d\n",up);
+		for(i=n-1;i>=tempindex+1;i--)
+		{
+			printf("%d\n",arr[i] );
+			distance+=temph-arr[i];
+			temph=arr[i];
+
+		}
+	}
+	else
+	{
+		for(i=n-1;i>=0;i--)
+		{
+			if(arr[i]<h)
+			{
+				tempindex=i+1;
+				break;
+			}
+		}
+		for(i=tempindex;i<n;i++)
+		{
+			printf("%d\n",arr[i] );
+			distance+=arr[i]-temph;
+			temph=arr[i];
+		}	
+		printf("%d\n",up );
+		distance+=up-temph;
+		temph=0;
+		printf("%d\n",0);
+		for(i=0;i<=tempindex-1;i++)
+		{
+			printf("%d\n",arr[i] );
+			distance+=arr[i]-temph;
+			temph=arr[i];
+		}	
+	}
+	printf("total distace covered is%d\n",distance );
+}
+void clook()
+{
+	distance=0;
+	if(h<p)
+	{
+		for(i=0;i<n;i++)
+		{
+			if(arr[i]>h)
+			{
+				tempindex=i-1;
+				break;
+			}
+		}
+		for(i=tempindex;i>=0;i--)
+		{
+			printf("%d\n",arr[i] );
+			distance+=(temph-arr[i]);
+			temph=arr[i];
+		}
+		temph=arr[n-1];
+		printf("%d\n",temph);
+		for(i=n-2;i>=tempindex+1;i--)
+		{
+			printf("%d\n",arr[i] );
+			distance+=temph-arr[i];
+			temph=arr[i];
+
+		}
+	}
+	else
+	{
+		for(i=n-1;i>=0;i--)
+		{
+			if(arr[i]<h)
+			{
+				tempindex=i+1;
+				break;
+			}
+		}
+		for(i=tempindex;i<n;i++)
+		{
+			printf("%d\n",arr[i] );
+			distance+=arr[i]-temph;
+			temph=arr[i];
+		}	
+		temph=arr[0];
+		printf("%d\n",temph );
+		for(i=1;i<=tempindex-1;i++)
+		{
+			printf("%d\n",arr[i] );
+			distance+=arr[i]-temph;
+			temph=arr[i];
+		}	
+	}
+	printf("total distace covered is%d\n",distance );
+}
 
 
 
