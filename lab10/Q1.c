@@ -75,6 +75,7 @@ void sstf()
 	int exit=1;
 	int diff;
 	int index;
+	temph=h;
 	while(1)
 	{
 
@@ -82,11 +83,11 @@ void sstf()
 		smallest=up;
 		for(i=0;i<n;i++)
 		{
-			if(flag[i]==0&&arr[i]!=h)
+			if(flag[i]==0&&arr[i]!=temph)
 			{
 				
 				exit=0;
-				diff=arr[i]-h;
+				diff=arr[i]-temph;
 				if(diff<0)
 					diff=diff*(-1);
 				if(diff<smallest)
@@ -105,9 +106,9 @@ void sstf()
 			break;
 				
 		}
-		h=arr[index];
+		temph=arr[index];
 		flag[index]=1;
-		printf("%d\n",h);
+		printf("%d\n",temph);
 		distance+=smallest;	
 		
 	}
@@ -115,6 +116,7 @@ void sstf()
 void scan()
 {
 	distance=0;
+	temph=h;
 	if(h<p)
 	{
 		for(i=0;i<n;i++)
@@ -174,6 +176,7 @@ void scan()
 void cscan()
 {
 	distance=0;
+	temph=h;
 	if(h<p)
 	{
 		for(i=0;i<n;i++)
@@ -234,6 +237,7 @@ void cscan()
 void clook()
 {
 	distance=0;
+	temph=h;
 	if(h<p)
 	{
 		for(i=0;i<n;i++)
